@@ -1,4 +1,5 @@
 import { readFileSync } from "fs"
+import { Compiler } from "webpack"
 import InjectPlugin from "webpack-inject-plugin"
  
 function customLoader(options: CraftExtensionApiPluginOptions) {
@@ -13,8 +14,10 @@ export class CraftExtensionApiPlugin {
   constructor(private options: CraftExtensionApiPluginOptions = {}) {
   }
  
-  apply(compiler: any) {
-    new InjectPlugin(customLoader(this.options)).apply(compiler)
+  apply(compiler: Compiler) {
+    if (compiler.options.mode === "development") {
+      new InjectPlugin(customLoader(this.options)).apply(compiler)
+    }
   }
 }
 
