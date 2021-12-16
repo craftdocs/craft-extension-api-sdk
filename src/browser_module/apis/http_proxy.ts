@@ -31,13 +31,13 @@ function convertResponseHeaders(headers: Headers): CraftHttpHeaders {
   return result
 }
 
-function convertRequestBody(body?: CraftHttpRequestBody): Buffer | undefined {
+function convertRequestBody(body?: CraftHttpRequestBody): XMLHttpRequestBodyInit | undefined {
   if (body == undefined) {
     return undefined
   }
 
   if (body.type === "text") {
-    return Buffer.from(body.text, "utf-8")
+    return body.text
   }
 
   throw new Error("Not supported")
