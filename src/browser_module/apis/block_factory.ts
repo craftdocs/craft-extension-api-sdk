@@ -24,10 +24,7 @@ from "@craftdocs/craft-extension-api"
 
 export class BlockFactoryMock implements BlockFactory {
   public textBlock(block: CraftTextBlockConfig): CraftTextBlockInsert {
-    return {
-      type: "textBlock",
-      ...block
-    }
+    return create("textBlock", block)
   }
 
   public codeBlock(block: CraftCodeBlockConfig): CraftCodeBlockInsert {
@@ -74,5 +71,5 @@ export class BlockFactoryMock implements BlockFactory {
 }
 
 function create<TType extends string, TDetails extends {}>(type: TType, details: TDetails): TDetails & { type: TType } {
-  return { type, ... details };
+  return { type, ... details }
 }
