@@ -36,7 +36,7 @@ function convertRequestBody(body?: CraftHttpRequestBody): Buffer | undefined {
     return undefined
   }
 
-  if (body.text === "text") {
+  if (body.type === "text") {
     return Buffer.from(body.text, "utf-8")
   }
 
