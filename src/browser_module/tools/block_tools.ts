@@ -1,4 +1,13 @@
-import { CraftBlock, CraftBlockInsert, CraftBlockUpdate, CraftTextBlock, CraftTextBlockInsert } from "@craftdocs/craft-extension-api"
+import {
+  CraftBlock,
+  CraftBlockInsert,
+  CraftBlockUpdate,
+  CraftTableColumn,
+  CraftTableRow,
+  CraftTableRowInsert,
+  CraftTextBlock,
+  CraftTextBlockInsert
+} from "@craftdocs/craft-extension-api"
 import { deepCopy } from "./objects"
 import { createRandomId } from "./random"
 
@@ -68,10 +77,44 @@ export function createBlock(input: CraftBlockInsert): CraftBlock {
     })
   }
 
+  if (input.type === "urlBlock" || input.type === "fileBlock") {
+    return deepCopy({
+      ...input,
+      ...createCommonProperties(input),
+      layoutStyle: input.layoutStyle ?? "card"
+    })
+  }
+
+  if (input.type === "imageBlock" || input.type === "videoBlock") {
+    return deepCopy({
+      ...input,
+      ...createCommonProperties(input),
+      previewImageStyle: input.previewImageStyle ?? { fillStyle: "auto", sizeStyle: "auto" }
+    })
+  }
+
+  if (input.type === "tableBlock") {
+    return deepCopy({
+      ...input,
+      ...createCommonProperties(input),
+      rows: input.rows.map(convertRow)
+    })
+  }
+
   return deepCopy({
     ...input,
     ...createCommonProperties(input)
   })
+}
+
+function convertRow(row: CraftTableRowInsert): CraftTableRow {
+  return {
+    cells: row.cells.map(cell => ({
+      id: createRandomId(),
+      ...cell,
+      block: cell.block ? createBlock(cell.block) : undefined
+    }))
+  }
 }
 
 export function createFromBlockUpdate(block: CraftBlockUpdate): CraftBlock {

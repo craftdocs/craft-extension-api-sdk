@@ -1,6 +1,6 @@
 {
   "name": "@craftdocs/craft-extension-api-sdk",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/craftdocs/craft-extension-api-sdk#readme",
   "devDependencies": {
-    "@craftdocs/craft-extension-api": "0.0.3",
+    "@craftdocs/craft-extension-api": "0.0.4",
     "@types/mocha": "^9.0.0",
     "@types/node": "^16.11.10",
     "@types/webpack": "^5.28.0",
