@@ -2,7 +2,7 @@
 
 ## 0.0.4
 
-- [#5](https://github.com/craftdocs/craft-extension-api-sdk/issues/5): Fixed `httpProxy.fetch` to be browser compatible
+- [#7](https://github.com/craftdocs/craft-extension-api-sdk/issues/7): Fixed `httpProxy.fetch` to be browser compatible
 
 ## 0.0.3
 
